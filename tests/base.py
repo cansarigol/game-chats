@@ -33,6 +33,7 @@ def create_request(is_post, url, data=None, is_anonymous=None, **kwargs):
     user = AnonymousUser()
     if not is_anonymous:
         user = mixer.blend('users.User')
+        user.username = "ertugrulsarigol@gmail.com"
         user.set_password('123')
         for key, value in kwargs:
             setattr(user, key, value)

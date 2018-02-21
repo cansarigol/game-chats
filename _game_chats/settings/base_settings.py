@@ -7,6 +7,7 @@ def map_path(path):
 SECRET_KEY = "....."
 
 IGDB_API_KEY = ""
+IGDB_API_URL = "https://api-endpoint.igdb.com"
 
 DEBUG = True
 
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
 
     'home',
     'users',
+    'game_requests',
 
     'compressor',
 ]

@@ -1,13 +1,25 @@
 from django.contrib import messages
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
 from django.shortcuts import render, redirect
 from .forms import LoginForm
 from users.models import User
 from _game_chats.mixins import LoginNotRequiredMixin
 from .constants import message_user_login_error
+from game_requests.adapter import BaseAdapter
 
 class IndexView(TemplateView):
     template_name = "home/index.html"
+
+class GamesListView(View):
+    def get(self, request, *args, **kwargs):
+        return redirect("home:index")
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get('name', '')
+        games_list = ""
+        if name:
+            games_list = BaseAdapter()._games_list_from_name(name, count=10)
+        return render(request, 'home/games_list.html', {'games_list': games_list})
 
 class LoginView(LoginNotRequiredMixin, FormView):
     template_name = 'home/login.html'
