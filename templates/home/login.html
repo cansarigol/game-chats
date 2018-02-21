@@ -1,0 +1,9 @@
+{% extends '_base.html' %}
+{% block body %}
+    <div class="row justify-content-center">
+    <div class="col-md-6 col-xs-12">
+        {% url 'users:reset_password' as the_url %}
+        {% include "_customs/form_with_card.html" with card_header="Login" submit_button="Sign In" second_button="Reset Password" second_url=the_url  %}
+    </div>
+</div>
+{% endblock %}

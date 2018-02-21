@@ -1,0 +1,23 @@
+{% load static %}
+<header class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+          <img class="logo-header" src="{% static 'images/logo.png' %}" alt="Logo">
+        <a class="navbar-brand" href="{% url 'home:index' %}">Game Chats</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+           <!-- <li class="nav-item"> <a class="nav-link" href="{% url 'home:index' %}">Index</a></li> -->
+          </ul>
+          <ul class="nav navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                  <li class="nav-item"> <a class="nav-link" href="{% url 'users:manage' %}" class="">{{ user }}</a></li>
+                {% else %}
+                   <li class="nav-item"> <a class="nav-link" href="{% url 'home:login' %}" class="">Sign In</a>
+                    <li class="nav-item"> <a class="btn btn-success btn-raised" href="{% url 'home:login' %}" class="">Sign Up</a>
+                {% endif %}
+          </ul>
+        </div>
+      </div>
+    </header>

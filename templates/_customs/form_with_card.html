@@ -1,0 +1,19 @@
+<div class="card">
+    <h4 class="card-header">{{ card_header }}</h4>
+    <div class="card-body">
+      {% include '_customs/messages.html' %}
+      <form method="post">
+        {% csrf_token %} {% include '_customs/my_form_design.html' %}
+        <br>
+        <button type="submit" class="btn btn-block btn-raised btn-primary">{{ submit_button }}</button>
+      </form>
+    </div>
+    {% if second_button %}
+    <div class="card-footer">
+        <a href="{{ second_url }}" class="btn btn-raised btn-block btn-secondary">{{ second_button }}</a>
+        {% if third_button %}
+            <a href="{{ third_url }}" class="btn btn-raised btn-block btn-success">{{ third_button }}</a>
+        {% endif %}
+    </div>
+    {% endif %}
+  </div>
