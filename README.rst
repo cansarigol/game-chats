@@ -11,3 +11,6 @@ Gamechats.com source code
 
 
 Gamechats is a platform for gamers who talk and rate new games and tell stories about good old memories.
+
+
+Games data from `IGDB.com <http://www.igdb.com>`_
