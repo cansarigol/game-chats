@@ -1,24 +1,12 @@
 import os
-import json
-from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def map_path(path):
     return os.path.join(os.path.dirname(os.path.dirname(__file__)), '..', path).replace('\\', '/')
 
-with open(os.path.join(BASE_DIR, "secrets.json")) as f:
-    secrets = json.loads(f.read())
+SECRET_KEY = "....."
 
-def get_secret(setting, secrets=secrets):
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {0} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-SECRET_KEY = get_secret("SECRET_KEY")
-
-IGDB_API_KEY = get_secret("IGDB_API_KEY")
+IGDB_API_KEY = ""
 
 DEBUG = True
 
