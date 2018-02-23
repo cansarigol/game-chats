@@ -1,30 +1,24 @@
-{% extends "_base.html" %}
-{% block before_css_head %}
-    <title>Games List</title>
-{% endblock %}
-{% block body %}
+{% extends "_base.html" %} {% block before_css_head %}
+<title>Games List</title>
+{% endblock %} {% block body %}
 <div class="row">
-    {% for game in games_list %}
-    <div class="col-12">
-        {% include '_customs/game_card.html' with game=game %}
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        {% for game in games_list %} {% include '_customs/game_card.html' with game=game %} {% endfor %}
     </div>
-    {% endfor %}
+    <div class="col-md-4 col-sm-4 hidden-xs margin-vertical-10">
+        <h5>Order by</h5>
+        <div class="list-group list-group-flush">
+            <a href="?q={{ q }}&order=popularity:desc" class="list-group-item list-group-item-action 
+            {% if order == 'popularity:desc' %} active {% endif %}">
+                Relevance
+            </a>
+            <a href="?q={{ q }}&order=date:desc" class="list-group-item list-group-item-action
+             {% if order == 'date:desc' %} active {% endif %}">
+                Release Date
+            </a>
+        </div>
+    </div>
 </div>
-<div class="pagination">
-        <span class="step-links">
-            {% if games_list.has_previous %}
-                <a href="?q={{q}}&page=1">&laquo; first</a>
-                <a href="?q={{q}}&page={{ games_list.previous_page_number }}">previous</a>
-            {% endif %}
-    
-            <span class="current">
-                Page {{ games_list.number }} of {{ games_list.paginator.num_pages }}.
-            </span>
-    
-            {% if games_list.has_next %}
-                <a href="?q={{q}}&page={{ games_list.next_page_number }}">next</a>
-                <a href="?q={{q}}&page={{ games_list.paginator.num_pages }}">last &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+</div>
+
 {% endblock %}

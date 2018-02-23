@@ -10,9 +10,8 @@
           <ul class="navbar-nav">
            <!-- <li class="nav-item"> <a class="nav-link" href="{% url 'home:index' %}">Index</a></li> -->
            
-           <form class="form-inline my-2 my-lg-0" method="POST" action="{% url 'home:gameslist' %}">
-              {% csrf_token %}
-            <input class="form-control mr-sm-4" name="name" value="{{ q }}" type="search" placeholder="Search" aria-label="Search">
+           <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'home:gameslist' %}">
+            <input class="form-control mr-sm-4" name="q" value="{{ q }}" type="search" placeholder="Search" aria-label="Search">
           </form>
           </ul>
           <ul class="nav navbar-nav ml-auto">

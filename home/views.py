@@ -14,24 +14,17 @@ class IndexView(TemplateView):
 
 class GamesListView(View):
     def get(self, request, *args, **kwargs):
-        q = request.POST.get('q', '')
-        if not q:
-            return redirect("home:index")
-        page = request.POST.get('page', 1)
-        games_list = BaseAdapter()._games_list_from_name(q)
-        paginator = Paginator(games_list, 10)
-        return render(request, 'home/games_list.html', {'games_list': paginator.get_page(1), 'q': q, 'page': page})
-
-    def post(self, request, *args, **kwargs):
-        q = request.POST.get('name', '')
-        if not q:
-            return render(request, 'home/games_list.html', {'games_list': ''})
-        
-        games_list = BaseAdapter()._games_list_from_name(q)
-        paginator = Paginator(games_list, 10)
-        return render(request, 'home/games_list.html', {'games_list': paginator.get_page(1), 'q': q})
-
-        
+        q = request.GET.get('q', '')
+        order = request.GET.get('order', 'popularity:desc')
+        page = request.GET.get('page', 1)
+        games_list = []
+        if q:
+            games_list = BaseAdapter()._games_list_from_name(q, order)
+        return render(request, 'home/games_list.html', {
+            'games_list': games_list, 
+            'q': q, 'page': page, 
+            'order': order
+        })
 
 class LoginView(LoginNotRequiredMixin, FormView):
     template_name = 'home/login.html'
