@@ -26,22 +26,23 @@
                             {% if website.category == 1001 %}
                               <span><a class="btn btn-xs btn-outline-secondary  mini-link-button" href="{{ website.url }}" target="_blank">IGDB site</a></span>
                             {% else %}
-                            
+                            <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank"></a>
                                 {% if website.category == 1 %}
-                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Official site</a></span>
+                                Official site
                                 {% endif %} 
                                 {% if website.category == 5 %}
-                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Twitter</a></span>
+                                Twitter
                                 {% endif %} 
                                 {% if website.category == 6 %}
-                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Twitch</a></span>
+                                Twitch
                                 {% endif %} 
                                 {% if website.category == 9 %}
-                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Youtube</a></span>
+                                Youtube
                                 {% endif %} 
                                 {% if website.category == 13 %}
-                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank"> Steam</a></span>
+                                Steam
                                 {% endif %} 
+                            </span>
                             {% endif %}
                         {% endfor %}
                     </small>
