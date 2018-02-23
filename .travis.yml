@@ -1,14 +1,29 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
+env:
+  - DJANGO_VERSION=2.0.2
+  - DJANGO_SETTINGS_MODULE='_game_chats.settings.test_settings'
+addons:
+  - postgresql: "10"
 install:
-  - pip install -r requirements/base.txt
-  - pip install coveralls
+- pip install -r requirements/base.txt
+- pip install coveralls
+before_script:
+  - psql -c "CREATE DATABASE gamechats_db;" -U postgres
+
 script:
+  - python manage.py migrate --noinput
   - pytest
 after_success: coveralls
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: flkK0ntfQyPsiclsxj0b09evC/Mb6QI838rfBMFeirT8ZNv65Y/aIFubzNQVI2+d9tpto7cfLKnoj0KwlUkuKUx4yqM9PUpSSA0Sxr0QV9T/b14uTfrFa1zVuQBRKBmmgwS8qcZ79kW/9BQV5w2ydw4iiITJpCG+B9mGIsO1iGFc31TEf8jQROl9GMCsvesN2aEcMfObFdUkXPqR16mKVJAto1AFzSzNQYlvY4y/RaD/6wVNr3Pw+clOO35n1jsPijWBcMjNTuuB13jE10I+nUDbylbva15bp8Rg8So9ZU14tchrvj8Wppe7MuG6jCbZYpad9nRV4MHUPEaiHMMbEcA/iED4K32N/eluUueg7XBzsGTTp3VwcU8n/dGAyqg8C5cuC8jqnX7TLrQEvm0oiPP1VMJhQUjDdkWBxTq3iHsBqt56vZQ+NAfQL9akPrdsk8KwAXzvl1I6DtemsPQPHwi8mMdjGzDY1JnLKeGAt6zZLWZK8JCg/ahyl3kCqP+SNuIP8F7VlWTZZKtifVjNmJkxr/0flnzNRwycb45RrGVQG7gfts+O2/mJ2Q8I5LWIwEeHcwJXEKKDbFibIJaHkfiZtvxPgoJ3CaZgU0/0R0UcHiVVidKmwxLVpNnFkDGWra8ksYT7xSuY3XE7tAAAchdvKqo/0Ad5//8soMkMVUU=
+  app: gamechats
+
 notifications:
-    slack: gamechats:pjaTb9uiTnnpJHgjQ9pJ7vFc
-    on_success: always
-    on_failure: always
-  
+  slack: gamechats:pjaTb9uiTnnpJHgjQ9pJ7vFc
+  on_success: always
+  on_failure: always
