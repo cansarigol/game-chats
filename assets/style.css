@@ -6,3 +6,12 @@
 .margin-vertical-10 {
     margin: 10px 0;
 }
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.mini-link-button{
+    font-size: 0.7rem;
+    padding: 1px;
+}

@@ -7,4 +7,8 @@ install:
 script:
   - pytest
 after_success: coveralls
+notifications:
+    slack: gamechats:pjaTb9uiTnnpJHgjQ9pJ7vFc
+    on_success: change
+    on_failure: always
   

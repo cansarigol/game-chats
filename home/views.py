@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import TemplateView, FormView, View
 from django.shortcuts import render, redirect
 from .forms import LoginForm
@@ -7,19 +8,30 @@ from _game_chats.mixins import LoginNotRequiredMixin
 from .constants import message_user_login_error
 from game_requests.adapter import BaseAdapter
 
+
 class IndexView(TemplateView):
     template_name = "home/index.html"
 
 class GamesListView(View):
     def get(self, request, *args, **kwargs):
-        return redirect("home:index")
+        q = request.POST.get('q', '')
+        if not q:
+            return redirect("home:index")
+        page = request.POST.get('page', 1)
+        games_list = BaseAdapter()._games_list_from_name(q)
+        paginator = Paginator(games_list, 10)
+        return render(request, 'home/games_list.html', {'games_list': paginator.get_page(1), 'q': q, 'page': page})
 
     def post(self, request, *args, **kwargs):
-        name = request.POST.get('name', '')
-        games_list = ""
-        if name:
-            games_list = BaseAdapter()._games_list_from_name(name, count=10)
-        return render(request, 'home/games_list.html', {'games_list': games_list})
+        q = request.POST.get('name', '')
+        if not q:
+            return render(request, 'home/games_list.html', {'games_list': ''})
+        
+        games_list = BaseAdapter()._games_list_from_name(q)
+        paginator = Paginator(games_list, 10)
+        return render(request, 'home/games_list.html', {'games_list': paginator.get_page(1), 'q': q})
+
+        
 
 class LoginView(LoginNotRequiredMixin, FormView):
     template_name = 'home/login.html'

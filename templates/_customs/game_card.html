@@ -1,26 +1,73 @@
 {% load static %}
 <div class="card margin-vertical-10">
-        
-        <div class="card-body ">
-            <div class="row">
-                <div class="col-md-2 col-sm-2 col-xs-12">
-                        <img class="rounded float-left" 
-                        src="{% if game.cover.url  %} 
+    <div class="card-body ">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <img class="rounded float-left" src="{% if game.cover.url  %} 
                                 {{ game.cover.url }}
                              {% else %} 
                                 {% static 'images/noimage.png' %} 
-                            {% endif %}" 
-                        width=100 
-                        height=150
-                        alt="{{ game.name }}">
-                </div>
-                <div class="col-md-8 col-sm-8 col-xs-12">
-                        <h5 class="card-title text-left">{{ game.name }}</h5>
-                        <a href="#" class="btn btn-primary">Detail</a>
+                            {% endif %}" width=100 height=150 alt="{{ game.name }}">
+            </div>
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <h5 class="card-title text-left">{{ game.name }}</h5>
+                <small>{{ game.first_release_date }}</small>
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <p>{{ game.summary|truncatechars:100 }}</p>
+                    <div>
+                        {% for genre in game.genres_with_name %}
+                        <span class="badge badge-success">{{ genre.name }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="margin-top-10">
+                        <small>More details at 
+                        {% for website in game.websites %}
+                            {% if website.category == 1001 %}
+                              <span><a class="btn btn-xs btn-outline-secondary  mini-link-button" href="{{ website.url }}" target="_blank">IGDB site</a></span>
+                            {% else %}
+                            
+                                {% if website.category == 1 %}
+                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Official site</a></span>
+                                {% endif %} 
+                                {% if website.category == 5 %}
+                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Twitter</a></span>
+                                {% endif %} 
+                                {% if website.category == 6 %}
+                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Twitch</a></span>
+                                {% endif %} 
+                                {% if website.category == 9 %}
+                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank">Youtube</a></span>
+                                {% endif %} 
+                                {% if website.category == 13 %}
+                                <span><a class="btn btn-xs btn-outline-secondary mini-link-button" href="{{ website.url }}" target="_blank"> Steam</a></span>
+                                {% endif %} 
+                            {% endif %}
+                        {% endfor %}
+                    </small>
+                    </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div>
+                            <h1>Rating
+                                <span class="badge badge-pill badge-primary">5.0</span>
+                            </h1>
+                        </div>
+                        <hr>
+                        <div>
+                            {% if game.rating > 0 %}
+                            <h5 >IGDB Rating</h5>
+                            <div class="progress" data-toggle="tooltip" data-placement="top" title="Count {{ game.rating_count }}">
+                                <div class="progress-bar progress-bar-striped bg-secondary" role="progressbar" style="width: {{ game.rating|floatformat }}%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ game.rating|floatformat }}%</div>
+                                    
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-                
-           
         </div>
-        
-      </div>
+    </div>
+</div>
