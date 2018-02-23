@@ -16,11 +16,11 @@ class TestBase:
     def test_games_list_view(self):
         request = create_request(is_post=False, url='/games-list/', is_anonymous=True)
         response = GamesListView.as_view()(request)
-        assert response.status_code == 302, "Should have redirected"
+        assert response.status_code == 200, "Should have redirected"
 
         request = create_request(is_post=True, url='/games-list/', is_anonymous=True, data={'name': ""})
         response = GamesListView.as_view()(request)
-        assert response.status_code == 200, "Should have redirected"
+        assert response.status_code == 405, "Deleted Post"
 
     def test_login_view(self):
         request = create_request(is_post=False, url='', is_anonymous=False)
