@@ -21,7 +21,7 @@ before_script:
 - node_modules/.bin/webpack --config webpack.config.js
 script:
 - python manage.py migrate --noinput
-- pytest --ds=_game_chats.settings.staging
+- pytest
 after_success: coveralls
 deploy:
   skip_cleanup: true
