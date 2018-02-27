@@ -64,8 +64,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'gamechats_db',
-        'USER': 'gamechats_user',
-        'PASSWORD': '1234',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': "localhost",
         'PORT': 5432,
     }
