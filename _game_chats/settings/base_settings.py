@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'game_requests',
 
     'compressor',
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +111,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,  "assets"),
 ]
-
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
 
 SILK_ENABLED = False
 

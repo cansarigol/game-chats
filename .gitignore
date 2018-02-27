@@ -107,3 +107,4 @@ venv.bak/
 
 .vscode/*
 secrets.json
+node_modules

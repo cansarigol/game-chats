@@ -14,10 +14,11 @@ branches:
   - master
 install:
 - pip install -r requirements/base.txt
-- pip install zappa==0.45.1
+- npm install
 - pip install coveralls
 before_script:
 - psql -c "CREATE DATABASE gamechats_db;" -U postgres
+- node_modules/.bin/webpack --config webpack.config.js
 script:
 - python manage.py migrate --noinput
 - pytest
@@ -33,5 +34,5 @@ deploy:
   bucket_name: elasticbeanstalk-us-east-1-711704628243
 notifications:
   slack: gamechats:pjaTb9uiTnnpJHgjQ9pJ7vFc
-  on_success: always
+  on_success: change
   on_failure: always

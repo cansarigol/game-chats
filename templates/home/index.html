@@ -1,7 +1,9 @@
 {% extends "_base.html" %}
+{% load render_bundle from webpack_loader %}
 {% block before_css_head %}
     <title>Game Chats</title>
 {% endblock %}
 {% block body %}
-    <p>Top Games</p>
+    <div id="Hello_div"></div>
+    {% render_bundle 'main' %}
 {% endblock %}
