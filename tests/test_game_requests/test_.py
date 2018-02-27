@@ -12,7 +12,7 @@ class TestBase:
         assert r['error'], "Game name"
 
         r = base_adapter._games_list_from_name('horizon')
-        assert r['error'], "User-key"
+        assert r['error'], r
 
         settings.IGDB_API_KEY = "4aa780d9f54956d8330470f4cd303d47"
         base_adapter = BaseAdapter()
