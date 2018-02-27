@@ -24,6 +24,7 @@ script:
 - pytest
 after_success: coveralls
 deploy:
+  skip_cleanup: true
   provider: elasticbeanstalk
   access_key_id: $aws_access_key_id
   secret_access_key:
