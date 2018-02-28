@@ -110,3 +110,6 @@ secrets.json
 node_modules/
 
 __text.txt
+
+assets/bundles/
+static/bundles/
