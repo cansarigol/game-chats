@@ -11,6 +11,7 @@ branches:
   - master
 install:
 - pip install -r requirements/base.txt
+- pip install -r requirements/local.txt
 - npm install
 - pip install coveralls
 before_script:
