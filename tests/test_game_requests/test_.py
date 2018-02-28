@@ -1,7 +1,7 @@
 import pytest
 from django.conf import settings
 from game_requests.adapter import BaseAdapter
-from _game_chats import get_secret
+from _game_chats.settings import get_secret
 
 pytestmark = pytest.mark.django_db
 
