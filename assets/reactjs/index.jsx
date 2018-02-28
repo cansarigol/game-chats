@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 class Hello extends React.Component {
     render() {
         return (
-            <h1> Welcome To Game Chats !</h1>
+            <h1> Welcome To Game Chats</h1>
         );
     }
 }
