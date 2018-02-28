@@ -15,7 +15,6 @@ install:
 - pip install coveralls
 before_script:
 - psql -c "CREATE DATABASE gamechats_db;" -U postgres
-- node_modules/.bin/webpack --config webpack.config.js
 script:
 - python manage.py migrate --noinput
 - pytest
