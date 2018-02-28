@@ -4,15 +4,15 @@ var BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
     context: __dirname,
-    entry: './assets/reactjs/index', 
-    
+    entry: {
+        
+    },
     output: {
         path: path.resolve('./assets/bundles/'), 
         filename: '[name]-[hash].js', 
     },
     
     plugins: [
-        new BundleTracker({filename: './webpack-stats.json'}), 
         new webpack.ProvidePlugin({ 
             $: 'jquery',
             jQuery: 'jquery',
@@ -24,10 +24,7 @@ module.exports = {
         loaders: [
             {test: /\.jsx?$/, 
                 exclude: /node_modules/,
-                loader: 'babel-loader', 
-                query: {
-                    presets: ['react'] 
-                }
+                loaders: ['react-hot', 'babel'], 
             }
         ]
     },

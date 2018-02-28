@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    image: nodejs_app
+    restart: always
+    build: .
+    command: node /var/www/_game_chats/server.js
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:10.1
+    volumes:
+      - postgres_data:/var/lib/postgresl/data/
+  web:
+    build: .
+    command: python3 /var/www/_game_chats/manage.py migrate --settings=_game_chats.settings.staging
+    command: python3 /var/www/_game_chats/manage.py runserver 0.0.0.0:8001  --settings=_game_chats.settings.staging
+    volumes:
+      - .:/var/www/_game_chats
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

@@ -107,4 +107,6 @@ venv.bak/
 
 .vscode/*
 secrets.json
-node_modules
+node_modules/
+
+__text.txt

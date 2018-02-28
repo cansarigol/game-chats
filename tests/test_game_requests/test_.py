@@ -1,6 +1,7 @@
 import pytest
 from django.conf import settings
 from game_requests.adapter import BaseAdapter
+from _game_chats import get_secret
 
 pytestmark = pytest.mark.django_db
 
@@ -14,7 +15,7 @@ class TestBase:
         r = base_adapter._games_list_from_name('horizon')
         assert r['error'], r
 
-        settings.IGDB_API_KEY = "4aa780d9f54956d8330470f4cd303d47"
+        settings.IGDB_API_KEY = get_secret("IGDB_API_KEY", "test_secrets.json")
         base_adapter = BaseAdapter()
         r = base_adapter._games_list_from_name('horizon')
         assert 'horizon' in r[0]['name'].lower(), "Name not found on IGDB"
