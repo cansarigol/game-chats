@@ -3,7 +3,7 @@ import pytest
 from ..base import create_request
 from home.views import IndexView, LoginView, GamesListView
 from mixer.backend.django import mixer
-from mock import patch
+#from mock import patch
 
 pytestmark = pytest.mark.django_db
 

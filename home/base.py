@@ -19,3 +19,6 @@ class MyBaseForm(BaseForm, forms.Form):
             )
         return True
 
+class MyBaseModelForm(BaseForm, forms.ModelForm):
+    pass
+

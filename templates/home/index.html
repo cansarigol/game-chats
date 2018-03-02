@@ -4,6 +4,7 @@
     <title>Game Chats</title>
 {% endblock %}
 {% block body %}
-    <div id="Hello_div"></div>
+    {% include '_customs/messages.html' %}
+    <div id="container_div"></div>
     {% render_bundle 'index' %}
 {% endblock %}

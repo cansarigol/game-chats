@@ -12,16 +12,33 @@ services:
     image: postgres:10.1
     volumes:
       - postgres_data:/var/lib/postgresl/data/
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+  celery:
+    build:
+      context: .
+    env_file: .env
+    command: celery -A _game_chats worker -l info -Q user_tasks_queue
+    volumes:
+      - .:/app:Z
+    links:
+      - redis
+    depends_on:
+      - redis
   web:
     build: .
-    command: python3 /var/www/_game_chats/manage.py migrate --settings=_game_chats.settings.staging
-    command: python3 /var/www/_game_chats/manage.py runserver 0.0.0.0:8001  --settings=_game_chats.settings.staging
+    command: python3 manage.py migrate --settings=_game_chats.settings.staging
+    command: python3 manage.py runserver 0.0.0.0:8001  --settings=_game_chats.settings.staging
     volumes:
       - .:/var/www/_game_chats
     ports:
       - "8001:8001"
     depends_on:
       - db
+      - redis
+      - celery
 
 volumes:
   postgres_data:

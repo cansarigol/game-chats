@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-class Hello extends React.Component {
+class Container extends React.Component {
     render() {
         return (
             <h1> Welcome To Game Chats</h1>
@@ -10,4 +10,4 @@ class Hello extends React.Component {
     }
 }
 
-ReactDOM.render(<Hello />, document.getElementById('Hello_div'))
+ReactDOM.render(<Container />, document.getElementById('container_div'))

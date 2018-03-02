@@ -1,1 +1,1 @@
-message_user_login_error = "Username and password do not match."
+message_user_login_error = "User name and password don't match."

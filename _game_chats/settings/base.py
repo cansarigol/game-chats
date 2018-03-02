@@ -11,6 +11,8 @@ IGDB_API_URL = "https://api-endpoint.igdb.com"
 
 DEBUG = True
 
+DOMAIN = "http://localhost:8000/"
+
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
@@ -53,6 +55,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'custom_filters': '_game_chats.templatetags.custom_filters',
+                'custom_tags': '_game_chats.templatetags.custom_tags'
+            }
         },
     },
 ]
@@ -114,10 +120,18 @@ STATICFILES_DIRS = [
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats-local.json'),
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack/stats-local.json'),
     }
 }
 
 SILK_ENABLED = False
 
 COMPRESS_ENABLED = False
+
+
+# CELERY STUFFs
+CELERY_BROKER_URL = os.environ.get('REDIS_BROKER_URL') or 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

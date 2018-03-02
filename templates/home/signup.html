@@ -1,0 +1,9 @@
+{% extends '_base.html' %}
+{% block body %}
+    <div class="row justify-content-center">
+    <div class="col-md-6 col-xs-12">
+        {% url 'home:login' as the_url %}
+        {% include "_customs/form_with_card.html" with card_header="Sign Up" submit_button="Sign In" second_button="I already have an account!" second_url=the_url  %}
+    </div>
+</div>
+{% endblock %}

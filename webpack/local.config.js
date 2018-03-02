@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var BundleTracker = require('webpack-bundle-tracker')
 
 var ip = 'localhost'
-var config = require('./webpack.base.config.js')
+var config = require('./base.config.js')
 
 config.devtool = "#eval-source-map"
 
@@ -11,8 +11,8 @@ config.entry = {
     index: [
         'webpack-dev-server/client?http://' + ip + ':3000',
         'webpack/hot/only-dev-server',
-        './assets/reactjs/index',
-    ],
+        '../assets/reactjs/index',
+    ]
 }
 
 config.output.publicPath = 'http://' + ip + ':3000' + '/assets/bundles/'
@@ -20,7 +20,7 @@ config.output.publicPath = 'http://' + ip + ':3000' + '/assets/bundles/'
 config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
-  new BundleTracker({filename: './webpack-stats-local.json'}),
+  new BundleTracker({filename: './webpack/stats-local.json'}),
 ])
 
 

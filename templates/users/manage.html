@@ -1,0 +1,8 @@
+{% extends "_base.html" %} 
+{% block before_css_head %}
+<title>User infos</title>
+{% endblock %} 
+{% block body %}
+<a class="btn btn-raised btn-warning" href="{% url 'users:logout' %}">Logout</a>
+
+{% endblock %}

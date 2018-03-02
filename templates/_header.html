@@ -18,8 +18,8 @@
                 {% if user.is_authenticated %}
                   <li class="nav-item"> <a class="nav-link" href="{% url 'users:manage' %}" class="">{{ user }}</a></li>
                 {% else %}
-                   <li class="nav-item"> <a class="nav-link" href="{% url 'home:login' %}" class="">Sign In</a>
-                    <li class="nav-item"> <a class="btn btn-success btn-raised" href="{% url 'home:login' %}" class="">Sign Up</a>
+                   <li class="nav-item"> <a class="nav-link" href="{% url 'home:login' %}" class="">Login</a>
+                    <li class="nav-item"> <a class="btn btn-success btn-raised" href="{% url 'home:signup' %}" class="">Sign Up</a>
                 {% endif %}
           </ul>
         </div>

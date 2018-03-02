@@ -1,12 +1,15 @@
+{% load custom_filters %}
 {% for field in form %}
     {% if not field.errors %}
         {{ field.label_tag }} {{ field }}
     {% else %}
     <div class="form-group has-error has-feedback">
             <label class="control-label">{{ field.label }}</label>
-                {{ field }}
+                {{ field | addcss:"is-invalid" }}
             {% for fielderror in field.errors %}
-              <div class="my-invalid-feedback">{{ fielderror }}</div>
+            <div class="invalid-feedback">
+                    {{ fielderror }}
+                  </div>
             {% endfor %}
             <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
         </div>

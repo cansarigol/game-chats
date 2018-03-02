@@ -1,13 +1,17 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import TemplateView, FormView, View
+from django.views.generic import TemplateView, FormView, View, CreateView
 from django.shortcuts import render, redirect
-from .forms import LoginForm
-from users.models import User
+from django.urls import reverse_lazy
+from django.conf import settings
+
+
+from .forms import LoginForm, SignupForm
+from users.models import User, UserProfile
 from _game_chats.mixins import LoginNotRequiredMixin
 from .constants import message_user_login_error
 from game_requests.adapter import BaseAdapter
-
+from tasks.user_queue import send_mail
 
 class IndexView(TemplateView):
     template_name = "home/index.html"
@@ -41,3 +45,31 @@ class LoginView(LoginNotRequiredMixin, FormView):
             return render(self.request, self.template_name, {'form': form, })
 
         return redirect(self.success_url)
+
+class SignupView(LoginNotRequiredMixin, CreateView):
+    template_name = 'home/signup.html'
+    success_url = "home:index"
+    form_class = SignupForm
+
+    def get_success_url(self):
+        newuser = self.object
+        newuser.set_password(newuser.password)
+        newuser.save()
+        new_profile = UserProfile(user=newuser)
+        new_profile.save()
+
+        send_mail.apply_async(
+                kwargs={
+                    'template': "emails/confirm_user.html",
+                    'context': {'domain': settings.DOMAIN,
+                                'user': newuser.name,
+                                'activation_key': new_profile.activation_key},
+                                'email': [newuser.email, ],
+                                'subject': "Confirm your account"
+                },
+                queue='user_tasks_queue',
+                routing_key='emails.user'
+            )
+            
+        messages.success(self.request, "We've sent your confirmation email!")
+        return reverse_lazy(self.success_url)

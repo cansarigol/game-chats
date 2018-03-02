@@ -1,5 +1,6 @@
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 from django.db import models
+from .utils import generate_new_activation_key
 
 class UserManager(BaseUserManager):
     def create_user(self, email, name, password):
@@ -27,7 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True, db_index=True)
     date_joined = models.DateTimeField(null=True)
 
-    is_accept_agreement = models.BooleanField()
+    is_accept_agreement = models.BooleanField(default=True)
     is_accept_notify = models.BooleanField(default=False)
 
     is_sms_active = models.BooleanField(default=False)
@@ -59,6 +60,11 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.name
+
+    def save(self):
+        self.activation_key = generate_new_activation_key(self.user.email)
+        super().save()
+
 
     @staticmethod
     def valid_activation_key(user, verify_code):

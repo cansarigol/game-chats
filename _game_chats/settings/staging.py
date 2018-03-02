@@ -34,3 +34,12 @@ LOGGING = {
         }
     },
 }
+
+# EMAIL STUFF
+EMAIL_HOST = get_secret("EMAIL_HOST", "test_secrets.json")
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_USER", "test_secrets.json")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD", "test_secrets.json")
+EMAIL_PORT = get_secret("EMAIL_PORT", "test_secrets.json")
+EMAIL_USE_SSL = get_secret("EMAIL_USE_SSL", "test_secrets.json")
+DEFAULT_FROM_EMAIL = get_secret("DEFAULT_FROM_EMAIL", "test_secrets.json")
+SERVER_EMAIL = get_secret("SERVER_EMAIL", "test_secrets.json")
