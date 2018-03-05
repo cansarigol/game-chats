@@ -11,7 +11,7 @@ config.entry = {
     index: [
         'webpack-dev-server/client?http://' + ip + ':3000',
         'webpack/hot/only-dev-server',
-        '../assets/reactjs/index',
+        '../frontend/index',
     ]
 }
 
