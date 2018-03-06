@@ -7,7 +7,7 @@ from mixer.backend.django import mixer
 
 pytestmark = pytest.mark.django_db
 
-class TestBase:
+class TestClass:
     def test_index(self):
         request = create_request(is_post=False, url='', is_anonymous=True)
         response = IndexView.as_view()(request)
@@ -18,9 +18,13 @@ class TestBase:
         response = GamesListView.as_view()(request)
         assert response.status_code == 200, "Should have redirected"
 
-        request = create_request(is_post=True, url='/games-list/', is_anonymous=True, data={'name': ""})
+        request = create_request(is_post=True, url='/games-list/', is_anonymous=True)
         response = GamesListView.as_view()(request)
         assert response.status_code == 405, "Deleted Post"
+    
+        request = create_request(is_post=False, url='/games-list/?q=The Witcher 3: Wild Hunt', is_anonymous=True)
+        response = GamesListView.as_view()(request)
+        assert 'The Witcher 3: Wild Hunt' in str(response.content)
 
     def test_login_view(self):
         request = create_request(is_post=False, url='', is_anonymous=False)

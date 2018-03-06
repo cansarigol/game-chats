@@ -65,6 +65,16 @@ class UserProfile(models.Model):
         self.activation_key = generate_new_activation_key(self.user.email)
         super().save()
 
+    def update_or_save(self):
+        userprofile = UserProfile.objects.filter(user=self.user)
+        if userprofile:
+            userprofile[0].activation_key = self.activation_key if self.activation_key else generate_new_activation_key(self.user.email)
+            userprofile[0].save()
+            return userprofile[0]
+
+        newprofile = UserProfile.save(self)
+        return newprofile
+
 
     @staticmethod
     def valid_activation_key(user, verify_code):

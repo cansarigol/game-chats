@@ -6,7 +6,7 @@ from mixer.backend.django import mixer
 
 pytestmark = pytest.mark.django_db
 
-class TestBase:
+class TestClass:
     def test_manage(self):
         request = create_request(is_post=False, url='/user/manage/', is_anonymous=True)
         response = IndexView.as_view()(request)

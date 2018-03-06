@@ -17,12 +17,11 @@ services:
     ports:
       - '6379:6379'
   celery:
-    build:
-      context: .
+    build: .
     env_file: .env
     command: celery -A _game_chats worker -l info -Q user_tasks_queue
     volumes:
-      - .:/app:Z
+      - .:/var/www/_game_chats
     links:
       - redis
     depends_on:

@@ -5,7 +5,7 @@ from _game_chats.settings import get_secret
 
 pytestmark = pytest.mark.django_db
 
-class TestBase:
+class TestClass:
     def test_adapter(self):
         base_adapter = BaseAdapter()
         r = base_adapter._games_list_from_name('')

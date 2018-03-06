@@ -4,9 +4,9 @@ from django.views.generic import TemplateView, FormView, View, CreateView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.contrib.auth import login
 
-
-from .forms import LoginForm, SignupForm
+from .forms import LoginForm, SignupForm, ResetForm
 from users.models import User, UserProfile
 from _game_chats.mixins import LoginNotRequiredMixin
 from .constants import message_user_login_error
@@ -44,7 +44,40 @@ class LoginView(LoginNotRequiredMixin, FormView):
             messages.error(self.request, message_user_login_error)
             return render(self.request, self.template_name, {'form': form, })
 
+        login(self.request, user)
         return redirect(self.success_url)
+
+class ResetPasswordView(LoginNotRequiredMixin, FormView):
+    template_name = 'home/reset.html'
+    success_url = "home:index"
+    form_class = ResetForm
+
+    def form_valid(self, form):
+        form_clean = form.clean()
+        email = str(form_clean['email'])
+        user = User.objects.get_from_email(form_clean['email'])
+        if not user:
+            messages.error(self.request, "E-mail not found!")
+            return render(request, 'home/reset.html', {
+                'form': form
+            })
+        new_profile = UserProfile(user=user).update_or_save()
+        send_mail.apply_async(
+            kwargs={
+                'template': "emails/reset_user.html",
+                'context': {'domain': settings.DOMAIN,
+                            'user': user.name,
+                            'activation_key': new_profile.activation_key},
+                            'email': [user.email, ],
+                            'subject': "Reset your password"
+            },
+            queue='user_tasks_queue',
+            routing_key='emails.user'
+        )
+        
+        messages.success(self.request, "Reset password email has been sent")
+        return redirect(self.success_url)
+
 
 class SignupView(LoginNotRequiredMixin, CreateView):
     template_name = 'home/signup.html'

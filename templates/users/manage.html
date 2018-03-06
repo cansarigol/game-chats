@@ -3,6 +3,7 @@
 <title>User infos</title>
 {% endblock %} 
 {% block body %}
-<a class="btn btn-raised btn-warning" href="{% url 'users:logout' %}">Logout</a>
+<a class="btn btn-raised btn-lg btn-warning" href="{% url 'users:logout' %}">Logout</a>
+<a class="btn btn-raised btn-lg btn-primary" href="{% url 'users:change_password' %}">Change Password</a>
 
 {% endblock %}

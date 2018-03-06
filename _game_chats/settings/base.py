@@ -130,8 +130,12 @@ COMPRESS_ENABLED = False
 
 
 # CELERY STUFFs
+BROKER_TRANSPORT = "redis"
+BROKER_HOST = "localhost"  # Maps to redis host.
+BROKER_PORT = 6379         # Maps to redis port.
 CELERY_BROKER_URL = os.environ.get('REDIS_BROKER_URL') or 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = CELERY_BROKER_URL
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'redis'

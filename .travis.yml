@@ -24,10 +24,3 @@ notifications:
   slack: gamechats:pjaTb9uiTnnpJHgjQ9pJ7vFc
   on_success: change
   on_failure: always
-deploy:
-  api_key:
-    provider: heroku
-    app: gamechats
-    secure: iisY8z9w/e78Z5qfx6/wBKPAzw/AKJnaoQuNOXr94i/BKXnDIREWVxfOZz+5dkDl0yAEuGaBUSaf0wF3iJ7M4O+AU7tcEjB+1w/wKq3zyvYWK5jZ/MTFuwQmaEMPLP1a83/iiddxzh1wLfzZ4Kdq+NylwN8K8NLwiMzYbqztDE/pcbbvT5jBJS6SgI0n8mOvvb+E8cd1lPgukOt/nDut69YcuFoVR9QlBtniFcQ1niSprr011BhzsM8cwOStBurxsnGwQI2koAxvJxjeBaFAFUc3YvobFT8tjTe/vLeqeX4zvFkBZ387x9p66v88sfWLpGdgHsPz+ecRPrs4kLGx1E9OEjl5nYD1BXWLRAsbLkM6I/coW+stTxWGgMWOLsTH/UQ4LcUL5qRyDBB8QekOqTRrfaWoySLey+tZhk2tc8LAzh+kY6sLiuvaqzNttkyyYtfOe9sED3QYW9r2acCQ1hBKZeCCzdAmR2Th1QNEZk2/inAAOESaJDvHuGsSZntghH1A8Sn/jIkQbJJdTeYm6DfYgMFOhsE7aTjacXEl6fWEEcEipIJ9Ih0+Zsxyv+rl6myuJ1dbw/vy1TQJnWpSwr4pe/Q3VAWpAXEqitIICdmA4D209+tPlKP2fDxfa+uGf+MRq7AgWEWct2I1bNQ+JtoJF62qJ8L0S8BaIqnXZqY=
-    skip_cleanup: true
-    on: master

@@ -23,9 +23,20 @@ def webpack():
 def nodejs():
     local('node server.js')
 
-def celery():
-    run_with_venv('celery -A _game_chats worker -l info -Q user_tasks_queue', capture=False)
+def celery(var="local"):
+    run_with_venv('DJANGO_SETTINGS_MODULE="game_chats.settings.{0}" && celery -A _game_chats worker -l info -Q user_tasks_queue '.format(var), capture=False)
 
 def debug(var=""):
     run_with_venv("./manage.py runserver {0}".format(var), capture=False)
+
+def test(app_name="", method_name=""):
+    """
+    For pytest execute with params. 
+    e.g. -> fab test:test_home/test_views.py,test_games_list_view
+    """
+    if app_name:
+        app_name = "tests/{0}".format(app_name)
+        if method_name:
+            app_name = "{0}::TestClass::{1}".format(app_name, method_name)
+    run_with_venv("pytest {0}".format(app_name), capture=False)
     
