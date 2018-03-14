@@ -19,10 +19,8 @@ config.output.publicPath = 'http://' + ip + ':3000' + '/assets/bundles/'
 
 config.plugins = config.plugins.concat([
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new BundleTracker({filename: './webpack/stats-local.json'}),
 ])
-
-
 
 module.exports = config

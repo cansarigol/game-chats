@@ -18,7 +18,7 @@ def requirements(local=True):
 
 def webpack():
     local("rm -rf assets/bundles/*")
-    local("node_modules/.bin/webpack --config webpack/local.config.js")
+    run_with_venv("node_modules/.bin/webpack --config webpack/local.config.js")
 
 def nodejs():
     local('node server.js')

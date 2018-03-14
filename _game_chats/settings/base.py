@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'users',
     'game_requests',
 
-    'compressor',
     'webpack_loader',
 ]
 
@@ -108,8 +107,7 @@ LOGIN_URL = '/users/login/'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR,  "static")
