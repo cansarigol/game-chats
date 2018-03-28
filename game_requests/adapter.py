@@ -24,8 +24,7 @@ class BaseAdapter(object):
             result['message']="user-key not found"
             return result
 
-        fields = "id,name,slug,websites,rating,rating_count,cover,genres,summary,first_release_date"
-        r = requests.get(f'{self.url}/games/?search={name}&fields={fields}&limit={count}&order={order}', headers=self.headers)
+        r = requests.get(f'{self.url}/games/?search={name}&fields=id,name,slug,websites,rating,rating_count,cover,genres,summary,first_release_date&limit=20&order=popularity:desc', headers=self.headers)
         games = r.json()
         for game in games:
             if 'genres' in game:

@@ -12,6 +12,8 @@
         window.django = {
             csrf: "{{ csrf_token }}",
             logo: "{% static 'images/logo.png' %}",
+            api_key: "{{ request.api_key }}",
+            api_url: "{{ request.api_url }}",
             user: {
                 is_authenticated: '{{ request.user.is_authenticated|lower }}',
                 username: "{{ request.user.username }}",
